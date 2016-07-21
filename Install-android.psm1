@@ -32,7 +32,11 @@ function install-android {
 
     if ($changeDPI) {
 
+        
+        # This countdown is no longer necessary since I found the adb command to turn off the monitor screen
+        <#
         write-host "Please tap the power button to turn off the monitor screen."
+       
         
         for ($i = 10; $i -ge 0; $i --) {
         
@@ -40,7 +44,12 @@ function install-android {
             write-host "Waiting $i seconds"
 
         }
+        #>
 
+        write-host "Turning screen off to change the DPI setting..."
+
+        adb shell input keyevent 26
+        sleep -Seconds 1
         adb shell am display-density 240
         adb reboot
 
@@ -52,6 +61,8 @@ function install-android {
         adb -s $serial install c:\adb_images\surelock.apk
         adb -s $serial install c:\adb_images\com.microsoft.rdc.android-8.1.31.44-APK4Fun.com.apk
 
+        # This countdown is no longer necessary since I found the adb command to turn off the monitor screen
+        <#
         write-host "Please tap the power button to turn off the monitor screen."
         
         for ($i = 10; $i -ge 0; $i --) {
@@ -60,7 +71,12 @@ function install-android {
             write-host "Waiting $i seconds"
 
         }
+        #>
 
+        write-host "Turning screen off to change the DPI setting..."
+
+        adb shell input keyevent 26
+        sleep -Seconds 1
         adb shell am display-density 240
         adb reboot
 
